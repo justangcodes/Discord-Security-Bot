@@ -17,7 +17,7 @@ module.exports = async(client, con, message) => {
                 if(row[0]) {
                     let prefixembed = new MessageEmbed()
                     .setColor(client.config.colorhex)
-                    .setDescription(`This guilds prefix is \`${row[0].prefix}\``)
+                    .setDescription(`This guilds prefix is \`${row[0].prefix}\`\n**Buy A Ban Database**\n[Hyperz Ban Database](https://hyperz.net/store/ban-database)`)
                     message.channel.send(prefixembed).catch(e => {});
                 }
             });
