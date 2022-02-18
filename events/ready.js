@@ -5,10 +5,24 @@ const nodelogger = require('hyperz-nodelogger')
 const logger = new nodelogger()
 const ms = require('ms')
 const Importer = require('mysql-import');
+const axios = require('axios');
 
 module.exports = async(client, con, ready) => {
 
     try {
+	    
+	let currver = require('../package.json').version
+        let request = await axios({
+            method: 'get',
+            url: `https://raw.githubusercontent.com/Itz-Hyperz/version-pub-api/main/versions.json`,
+            headers: {Accept: 'application/json, text/plain, */*','User-Agent': '*' }
+        });
+        let latestver = request.data.discord_security_bot
+        if(latestver != currver) {
+            console.log(chalk.red(`You are not on the latest version.\nCurrent Version: ${currver}\nLatest Version: ${latestver}`))
+        } else {
+            console.log(chalk.green(`You are up to date and running on the latest version. Version: ${currver}`))
+        }
                
         if(client.config.autoImportSQL) {
         // MySQL Auto Importer Lolz
